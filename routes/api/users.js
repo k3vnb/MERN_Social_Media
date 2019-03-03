@@ -4,6 +4,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
+const passport = require('passport');
 
 // Load User model, allows any Mongoose methods the route has
 const User = require('./../models/User');
@@ -86,5 +87,16 @@ router.post('/login', (req, res) => {
 
         });
 });
+
+// @route    GET api/users/current
+// @desc     Return current user
+// @access   Private
+router.get(
+    '/current', 
+    passport.authenticate('jwt', { session: false }), 
+    (req, res) => {
+    res.json(req.user); 
+    }
+)
 
 module.exports = router;
