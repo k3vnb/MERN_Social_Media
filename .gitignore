@@ -2,3 +2,4 @@
 DS_STORE
 .vscode/
 /config
+client/node_modules
